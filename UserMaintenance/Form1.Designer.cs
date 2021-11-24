@@ -33,6 +33,7 @@
             this.labelFullName = new System.Windows.Forms.Label();
             this.textBoxFullName = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listUsers
@@ -73,17 +74,28 @@
             // 
             this.buttonSave.Location = new System.Drawing.Point(338, 251);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(202, 23);
+            this.buttonSave.Size = new System.Drawing.Size(102, 23);
             this.buttonSave.TabIndex = 8;
             this.buttonSave.Text = "button2";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(446, 251);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(93, 22);
+            this.buttonDelete.TabIndex = 9;
+            this.buttonDelete.Text = "button3";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxFullName);
             this.Controls.Add(this.labelFullName);
@@ -103,6 +115,7 @@
         private System.Windows.Forms.Label labelFullName;
         private System.Windows.Forms.TextBox textBoxFullName;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
 

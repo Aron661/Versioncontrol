@@ -27,6 +27,7 @@ namespace UserMaintenance
 
             buttonAdd.Text = Resource1.Add;
             buttonSave.Text = Resource1.Fájlbaírás;
+            buttonDelete.Text = Resource1.törlés;
 
             listUsers.DataSource = users;
             listUsers.ValueMember = "ID";
@@ -63,6 +64,12 @@ namespace UserMaintenance
                     }
                 }
             }
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            User valasztottuser = (User)listUsers.SelectedItem;
+            users.Remove(valasztottuser);
         }
     }
 }

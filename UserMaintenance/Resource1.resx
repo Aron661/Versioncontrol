@@ -126,4 +126,7 @@
   <data name="Fájlbaírás" xml:space="preserve">
     <value>Fájlba mentés</value>
   </data>
+  <data name="törlés" xml:space="preserve">
+    <value>lista törlése</value>
+  </data>
 </root>

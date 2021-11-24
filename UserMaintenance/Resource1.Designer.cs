@@ -86,5 +86,14 @@ namespace UserMaintenance {
                 return ResourceManager.GetString("FullName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lista törlése.
+        /// </summary>
+        internal static string törlés {
+            get {
+                return ResourceManager.GetString("törlés", resourceCulture);
+            }
+        }
     }
 }
