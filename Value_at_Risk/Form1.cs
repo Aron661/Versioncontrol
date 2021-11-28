@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Value_at_Risk
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> ticks;
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> Nyereségek; //osztály szintjére fájlba mentésnél ff
 
         public Form1()
         {
@@ -67,7 +69,8 @@ namespace Value_at_Risk
 
             // Var (value at risk) számítása
 
-            List<decimal> Nyereségek = new List<decimal>();
+            //List<decimal> //ff
+            Nyereségek = new List<decimal>();
             int intervalum = 30;
             DateTime kezdőDátum = (from x in ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -110,6 +113,25 @@ namespace Value_at_Risk
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void btnFajlbament_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog()==DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                {
+                    sw.WriteLine("Időszak;Nyereség");
+                    int counter = 1;
+                    foreach (decimal item in Nyereségek)
+                    {
+                        sw.WriteLine(string.Format("{0};{1}", counter, item));
+                        counter++;
+                    }
+                }
+            }
+            
         }
     }
 }

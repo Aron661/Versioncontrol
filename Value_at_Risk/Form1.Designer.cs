@@ -30,6 +30,7 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.btnFajlbament = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -50,11 +51,22 @@
             this.dataGridView2.Size = new System.Drawing.Size(712, 150);
             this.dataGridView2.TabIndex = 1;
             // 
+            // btnFajlbament
+            // 
+            this.btnFajlbament.Location = new System.Drawing.Point(26, 194);
+            this.btnFajlbament.Name = "btnFajlbament";
+            this.btnFajlbament.Size = new System.Drawing.Size(130, 23);
+            this.btnFajlbament.TabIndex = 2;
+            this.btnFajlbament.Text = "Mentés";
+            this.btnFajlbament.UseVisualStyleBackColor = true;
+            this.btnFajlbament.Click += new System.EventHandler(this.btnFajlbament_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnFajlbament);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
@@ -69,6 +81,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button btnFajlbament;
     }
 }
 
