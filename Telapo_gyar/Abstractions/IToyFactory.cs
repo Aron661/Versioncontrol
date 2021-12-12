@@ -8,6 +8,6 @@ namespace Telapo_gyar.Abstractions
 {
     public interface IToyFactory
     {
-        Toy CreateNew(); // törzs nélküli metódus - imlementálás interfacenél
+        Toy CreateNew(); // Toy visszatérési értékü, törzs nélküli metódus - imlementálás interfacenél
     }
 }
