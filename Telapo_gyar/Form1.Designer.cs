@@ -35,6 +35,7 @@
             this.btn_Car = new System.Windows.Forms.Button();
             this.btn_Ball = new System.Windows.Forms.Button();
             this.label_next = new System.Windows.Forms.Label();
+            this.btnSzinez = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -86,11 +87,22 @@
             this.label_next.TabIndex = 3;
             this.label_next.Text = "Coming next:";
             // 
+            // btnSzinez
+            // 
+            this.btnSzinez.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnSzinez.Location = new System.Drawing.Point(168, 42);
+            this.btnSzinez.Name = "btnSzinez";
+            this.btnSzinez.Size = new System.Drawing.Size(33, 28);
+            this.btnSzinez.TabIndex = 4;
+            this.btnSzinez.UseVisualStyleBackColor = false;
+            this.btnSzinez.Click += new System.EventHandler(this.btnSzinez_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSzinez);
             this.Controls.Add(this.label_next);
             this.Controls.Add(this.btn_Ball);
             this.Controls.Add(this.btn_Car);
@@ -110,6 +122,7 @@
         private System.Windows.Forms.Button btn_Car;
         private System.Windows.Forms.Button btn_Ball;
         private System.Windows.Forms.Label label_next;
+        private System.Windows.Forms.Button btnSzinez;
     }
 }
 

@@ -11,6 +11,7 @@ namespace Telapo_gyar.Entities
 {
     public class Ball : Toy
     {
+       // public SolidBrush ballBrush { get; set; }
 
         protected override void DrawImage(Graphics g)
         {

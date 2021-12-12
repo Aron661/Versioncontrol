@@ -80,5 +80,16 @@ namespace Telapo_gyar
             _nextToy.Left = label_next.Left;
             Controls.Add(_nextToy);
         }
+
+        private void btnSzinez_Click(object sender, EventArgs e)
+        {
+            Button kattint = (Button)sender;
+            ColorDialog cd = new ColorDialog();
+            cd.Color = kattint.BackColor;
+
+            if (cd.ShowDialog() != DialogResult.OK) return;
+            kattint.BackColor = cd.Color;
+
+        }
     }
 }
