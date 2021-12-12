@@ -15,12 +15,17 @@ namespace Telapo_gyar
     public partial class Form1 : Form
     {
         List<Toy> _toys = new List<Toy>();
+        Toy _nextToy;
         private IToyFactory _ItoyFactory;
 
         public IToyFactory Factory
         {
             get { return _ItoyFactory; }
-            set { _ItoyFactory = value; }
+            set
+            {
+                _ItoyFactory = value;
+                DisplayNext();
+            }
         }
 
         public Form1()
@@ -43,17 +48,37 @@ namespace Telapo_gyar
             foreach (var toy in _toys)  //foreach segítségével menj végig a _balls(abstract előtt) listán és hívd meg mindegyik elemének a MoveBall metódusát
             {
                 toy.MoveToy();
-                if (toy.Left> maxPosition)
+                if (toy.Left > maxPosition)
                 {
                     maxPosition = toy.Left;
                 }
             }
-            if (maxPosition>1000)
+            if (maxPosition > 1000)
             {
                 var oldestToy = _toys[0];
                 mainPanel.Controls.Remove(oldestToy); //levétel a panelről
                 _toys.Remove(oldestToy); //levétel a listából
             }
+        }
+
+        private void btn_Car_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();  //töltsd fel a Factory property-t a megfelelő gyártó osztály példányával.
+        }
+
+        private void btn_Ball_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void DisplayNext()
+        {
+            if (label_next != null) Controls.Remove(_nextToy);
+         
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = label_next.Top + label_next.Height + 20;
+            _nextToy.Left = label_next.Left;
+            Controls.Add(_nextToy);
         }
     }
 }
