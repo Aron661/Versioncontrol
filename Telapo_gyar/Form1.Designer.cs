@@ -89,7 +89,7 @@
             // 
             // btnSzinez
             // 
-            this.btnSzinez.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnSzinez.BackColor = System.Drawing.Color.DarkRed;
             this.btnSzinez.Location = new System.Drawing.Point(168, 42);
             this.btnSzinez.Name = "btnSzinez";
             this.btnSzinez.Size = new System.Drawing.Size(33, 28);

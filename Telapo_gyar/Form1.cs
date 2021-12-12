@@ -68,7 +68,7 @@ namespace Telapo_gyar
 
         private void btn_Ball_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory() {BallColor=btnSzinez.BackColor }; //BallColor tulajdonságát a színválasztó gomb hátterének
         }
 
         private void DisplayNext()

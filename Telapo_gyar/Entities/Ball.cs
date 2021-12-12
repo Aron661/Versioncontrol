@@ -11,11 +11,16 @@ namespace Telapo_gyar.Entities
 {
     public class Ball : Toy
     {
-       // public SolidBrush ballBrush { get; set; }
+        public SolidBrush BallColor { get;private set; }
+
+        public Ball(Color kivantszin)
+        {
+            BallColor = new SolidBrush(kivantszin);
+        }
 
         protected override void DrawImage(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.Blue), 0, 0, Width, Height); // kitöltött kék kört a Graphics osztály segítségével. 
+            g.FillEllipse(BallColor, 0, 0, Width, Height); // kitöltött kék kört a Graphics osztály segítségével. 2. new SolidBrush(Color.Blue) helyett
         }
     }
 }
