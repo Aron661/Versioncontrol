@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telapo_gyar.Abstractions;
 using Telapo_gyar.Entities;
 
 namespace Telapo_gyar
 {
     public partial class Form1 : Form
     {
-        List<Ball> _balls = new List<Ball>();
+        List<Toy> _toys = new List<Toy>();
         private BallFactory _ballFactory;
 
         public BallFactory Factory
@@ -31,7 +32,7 @@ namespace Telapo_gyar
         private void createTimer_Tick(object sender, EventArgs e)
         {
             Ball b = Factory.CreateNew();
-            _balls.Add(b); //listához adás
+            _toys.Add(b); //listához adás
             b.Left = -b.Width; //Panel hozzáadás elött , (Ezzel a képernyőn kívül jön majd létre a labda)
             mainPanel.Controls.Add(b); //mainpanel vezérlőihez
         }
@@ -39,19 +40,19 @@ namespace Telapo_gyar
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var maxPosition = 0;
-            foreach (var ball in _balls)  //foreach segítségével menj végig a _balls listán és hívd meg mindegyik elemének a MoveBall metódusát
+            foreach (var toy in _toys)  //foreach segítségével menj végig a _balls(abstract előtt) listán és hívd meg mindegyik elemének a MoveBall metódusát
             {
-                ball.MoveBall();
-                if (ball.Left> maxPosition)
+                toy.MoveToy();
+                if (toy.Left> maxPosition)
                 {
-                    maxPosition = ball.Left;
+                    maxPosition = toy.Left;
                 }
             }
             if (maxPosition>1000)
             {
-                var oldestBall = _balls[0];
-                mainPanel.Controls.Remove(oldestBall); //levétel a panelről
-                _balls.Remove(oldestBall); //levétel a listából
+                var oldestToy = _toys[0];
+                mainPanel.Controls.Remove(oldestToy); //levétel a panelről
+                _toys.Remove(oldestToy); //levétel a listából
             }
         }
     }
