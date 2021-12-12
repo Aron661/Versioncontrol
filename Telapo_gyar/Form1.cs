@@ -15,23 +15,23 @@ namespace Telapo_gyar
     public partial class Form1 : Form
     {
         List<Toy> _toys = new List<Toy>();
-        private BallFactory _ballFactory;
+        private IToyFactory _ItoyFactory;
 
-        public BallFactory Factory
+        public IToyFactory Factory
         {
-            get { return _ballFactory; }
-            set { _ballFactory = value; }
+            get { return _ItoyFactory; }
+            set { _ItoyFactory = value; }
         }
 
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();//A konstruktorban töltsd fel a Factory változót egy BallFactory példánnyal.
+            Factory = new CarFactory();//A konstruktorban töltsd fel a Factory változót egy BallFactory példánnyal - abszt elött.
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            Ball b = Factory.CreateNew();
+            Toy b = Factory.CreateNew();
             _toys.Add(b); //listához adás
             b.Left = -b.Width; //Panel hozzáadás elött , (Ezzel a képernyőn kívül jön majd létre a labda)
             mainPanel.Controls.Add(b); //mainpanel vezérlőihez
