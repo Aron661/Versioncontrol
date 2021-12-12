@@ -36,6 +36,9 @@
             this.btn_Ball = new System.Windows.Forms.Button();
             this.label_next = new System.Windows.Forms.Label();
             this.btnSzinez = new System.Windows.Forms.Button();
+            this.btnPresent = new System.Windows.Forms.Button();
+            this.btn_dobozszin2 = new System.Windows.Forms.Button();
+            this.btn_dobozszin1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -81,7 +84,7 @@
             // label_next
             // 
             this.label_next.AutoSize = true;
-            this.label_next.Location = new System.Drawing.Point(277, 22);
+            this.label_next.Location = new System.Drawing.Point(440, 42);
             this.label_next.Name = "label_next";
             this.label_next.Size = new System.Drawing.Size(68, 13);
             this.label_next.TabIndex = 3;
@@ -97,11 +100,44 @@
             this.btnSzinez.UseVisualStyleBackColor = false;
             this.btnSzinez.Click += new System.EventHandler(this.btnSzinez_Click);
             // 
+            // btnPresent
+            // 
+            this.btnPresent.Location = new System.Drawing.Point(229, 13);
+            this.btnPresent.Name = "btnPresent";
+            this.btnPresent.Size = new System.Drawing.Size(75, 23);
+            this.btnPresent.TabIndex = 5;
+            this.btnPresent.Text = "PRESENT";
+            this.btnPresent.UseVisualStyleBackColor = true;
+            this.btnPresent.Click += new System.EventHandler(this.btnPresent_Click);
+            // 
+            // btn_dobozszin2
+            // 
+            this.btn_dobozszin2.BackColor = System.Drawing.Color.Coral;
+            this.btn_dobozszin2.Location = new System.Drawing.Point(229, 76);
+            this.btn_dobozszin2.Name = "btn_dobozszin2";
+            this.btn_dobozszin2.Size = new System.Drawing.Size(53, 32);
+            this.btn_dobozszin2.TabIndex = 6;
+            this.btn_dobozszin2.UseVisualStyleBackColor = false;
+            this.btn_dobozszin2.Click += new System.EventHandler(this.btnSzinez_Click);
+            // 
+            // btn_dobozszin1
+            // 
+            this.btn_dobozszin1.BackColor = System.Drawing.Color.Silver;
+            this.btn_dobozszin1.Location = new System.Drawing.Point(229, 42);
+            this.btn_dobozszin1.Name = "btn_dobozszin1";
+            this.btn_dobozszin1.Size = new System.Drawing.Size(53, 28);
+            this.btn_dobozszin1.TabIndex = 7;
+            this.btn_dobozszin1.UseVisualStyleBackColor = false;
+            this.btn_dobozszin1.Click += new System.EventHandler(this.btnSzinez_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_dobozszin1);
+            this.Controls.Add(this.btn_dobozszin2);
+            this.Controls.Add(this.btnPresent);
             this.Controls.Add(this.btnSzinez);
             this.Controls.Add(this.label_next);
             this.Controls.Add(this.btn_Ball);
@@ -123,6 +159,9 @@
         private System.Windows.Forms.Button btn_Ball;
         private System.Windows.Forms.Label label_next;
         private System.Windows.Forms.Button btnSzinez;
+        private System.Windows.Forms.Button btnPresent;
+        private System.Windows.Forms.Button btn_dobozszin2;
+        private System.Windows.Forms.Button btn_dobozszin1;
     }
 }
 

@@ -91,5 +91,31 @@ namespace Telapo_gyar
             kattint.BackColor = cd.Color;
 
         }
+
+        private void btnPresent_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory() { dobozColor = btn_dobozszin1.BackColor ,szalagColor=btn_dobozszin2.BackColor};
+        }
+/*
+        private void btn_dobozszin1_Click(object sender, EventArgs e)
+        {
+            Button kattint = (Button)sender;
+            ColorDialog cd = new ColorDialog();
+            cd.Color = kattint.BackColor;
+
+            if (cd.ShowDialog() != DialogResult.OK) return;
+            kattint.BackColor = cd.Color;
+        }
+
+        private void btn_dobozszin2_Click(object sender, EventArgs e)
+        {
+            Button kattint = (Button)sender;
+            ColorDialog cd = new ColorDialog();
+            cd.Color = kattint.BackColor;
+
+            if (cd.ShowDialog() != DialogResult.OK) return;
+            kattint.BackColor = cd.Color;
+        }
+*/
     }
 }
