@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using Valuta_idosor.Entities;
 using Valuta_idosor.MNBServiceReference;
@@ -23,6 +24,30 @@ namespace Valuta_idosor
             InitializeComponent();
             LoadXml(GetExchangeRates());        //3.GetExchangeRates() ami string átad Loadxmlbe
             dataGridView_Rates.DataSource = Rates;
+            makeChart();
+        }
+
+        private void makeChart()
+        {
+            chartRateData.DataSource = Rates;
+            Series sorozatok = chartRateData.Series[0];
+
+            sorozatok.ChartType = SeriesChartType.Line; //bekell hívatkozni
+            sorozatok.XValueMember = "Date";
+            sorozatok.YValueMembers = "Value";
+
+            sorozatok.BorderWidth = 2; //Az adatsor vastagsága legyen kétszeres
+
+            var jelmagyarazat = chartRateData.Legends[0];
+            jelmagyarazat.Enabled = false; //kikapcs chart-ban jelmagyarázat - legends
+
+            var diagrammterulet = chartRateData.ChartAreas[0];
+            diagrammterulet.AxisY.IsStartedFromZero = false; //ne 0-tól y tengely chartban
+
+            diagrammterulet.AxisX.MajorGrid.Enabled = false;
+            diagrammterulet.AxisY.MajorGrid.Enabled = false; //rács- grid kikapcs
+
+
         }
 
         private void LoadXml(string result) //4. (string ..)
