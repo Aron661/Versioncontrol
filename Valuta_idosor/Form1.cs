@@ -8,17 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Valuta_idosor.Entities;
 using Valuta_idosor.MNBServiceReference;
 
 namespace Valuta_idosor
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
 
         public Form1()
         {
             InitializeComponent();
             GetExchangeRates();
+            dataGridView_Rates.DataSource = Rates;
         }
 
         private void GetExchangeRates()
