@@ -18,11 +18,24 @@ namespace Valuta_idosor
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
 
         public Form1()
         {
             InitializeComponent();
+            LoadCurrenciesXml(GetCurrencies());
+          
+            comboBox_CURR.DataSource = Currencies; //+8.
             RefreshData();
+        }
+
+        private string GetCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+
+            var response = mnbService.GetCurrencies(request);
+            return response.GetCurrenciesResult;
         }
 
         private void RefreshData() //konst-ból kiszervezve -dinamikus
@@ -69,6 +82,8 @@ namespace Valuta_idosor
                 r.Date = DateTime.Parse(item.GetAttribute("date")); //item.GetAttribute("date");
 
                 var childElement = (XmlElement)item.ChildNodes[0];
+
+                if (childElement == null) continue;   //hiba miatt huf 
                 r.Currency = childElement.GetAttribute("curr");
 
                 decimal unit = decimal.Parse(childElement.GetAttribute("unit")); //egész szám (1 és felkészülni hogy nem 0- osztás m)
@@ -78,6 +93,21 @@ namespace Valuta_idosor
 
                 Rates.Add(r);/////
             }
+        }
+
+        private void LoadCurrenciesXml(string result) 
+        {
+            Currencies.Clear();
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement item in xml.DocumentElement.ChildNodes[0])
+            {
+                string s = item.InnerText;
+                Currencies.Add(s);
+            }
+
+
         }
 
         private string GetExchangeRates() //1.string bemeneti értékre vált
