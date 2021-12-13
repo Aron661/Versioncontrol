@@ -22,6 +22,14 @@ namespace Valuta_idosor
         public Form1()
         {
             InitializeComponent();
+            RefreshData();
+        }
+
+        private void RefreshData() //konst-ból kiszervezve -dinamikus
+        {
+            if (comboBox_CURR.SelectedItem == null) return; //dinamikus után üres combobox miatt
+
+            Rates.Clear();
             LoadXml(GetExchangeRates());        //3.GetExchangeRates() ami string átad Loadxmlbe
             dataGridView_Rates.DataSource = Rates;
             makeChart();
@@ -74,16 +82,32 @@ namespace Valuta_idosor
 
         private string GetExchangeRates() //1.string bemeneti értékre vált
         {
+           
             var mnbService = new MNBArfolyamServiceSoapClient(); //MNBServiceReference.MNBArfolyamServiceSoapClient() a rövidítés miatt - MNBServiceReference usinggal (quick..)
             GetExchangeRatesRequestBody request = new GetExchangeRatesRequestBody();
-            request.currencyNames = "EUR";
-            request.startDate = "2020-01-01";
-            request.endDate = "2020-06-30";
+            request.currencyNames =comboBox_CURR.SelectedItem.ToString() ;  //"EUR"
+            request.startDate = dateTimePicker_Kezd.Value.ToString("yyyy-MM-dd");  //"2020-01-01" - dinamikus lett
+            request.endDate = dateTimePicker_Veg.Value.ToString();     //"2020-06-30" 
 
             var response = mnbService.GetExchangeRates(request); //Hívd meg az mnbService GetExchangeRates nevű függvényét a request bemeneti paraméterrel, és a függvény visszatérési értékét tárold egy response nevű változóba
             return response.GetExchangeRatesResult;  //2. var result helyett - return kimenet
             //File.WriteAllText("teszt.xml", result);  - kiiratás result xml - debug
 
+        }
+
+        private void dateTimePicker_Kezd_ValueChanged(object sender, EventArgs e) //lehetne szebben is egy metódusba és elemenként behiv
+        {
+            RefreshData();
+        }
+
+        private void dateTimePicker_Veg_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox_CURR_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
