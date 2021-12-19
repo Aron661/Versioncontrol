@@ -32,7 +32,7 @@ namespace Mikroszimulacio10
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-
+                    SimStep(Population[i],year);
                 }
                 int ferfiakszama = (from x in Population where x.Gender == Gender.Male select x).Count();
                 int nokkszama = (from x in Population where x.Gender == Gender.Female select x).Count();
@@ -40,6 +40,33 @@ namespace Mikroszimulacio10
                 Console.WriteLine(String.Format("Év: {0} Férfiak: {1} Nők: {2})",year,ferfiakszama,nokkszama ));
             }
 
+        }
+
+        private void SimStep(Person person,int year)
+        {
+            if (!person.IsAlive) return;
+            int kor = year - person.BirthYear;
+            //halálozás valószínűsége
+
+            double HalalP = (from x in DeathProbabilities where x.Gender == person.Gender && x.Age == kor select x.P).FirstOrDefault();
+            // Meghal a személy?
+            double veletlen = rng.NextDouble();
+            if (veletlen <= HalalP) person.IsAlive = false;
+
+            if (person.IsAlive && person.Gender == Gender.Female) 
+            {
+            double SzuletesP = (from x in BirthProbabilities where x.Age == kor select x.P).FirstOrDefault();
+                veletlen = rng.NextDouble();
+                if (veletlen <= SzuletesP) //Születik gyermek?
+                {
+                    Person baba = new Person();
+                    baba.BirthYear = year;
+                    baba.NbrOfChildren = 0;
+                    baba.Gender = (Gender)rng.Next(1,3);
+                    Population.Add(baba);
+                }
+            }
+            
         }
 
         public List<Person> GetPopulation(string csvpath)
