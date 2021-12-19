@@ -18,14 +18,27 @@ namespace Mikroszimulacio10
         List<BirthProbability> BirthProbabilities;
         List<DeathProbability> DeathProbabilities;
 
+        Random rng = new Random(1234);
 
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopulation(@"C:\Temp\nép.csv");  //vagy @ v. \\
+            Population = GetPopulation(@"C:\Temp\nép-teszt.csv");  //vagy @ v. \\
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
-            dataGridView1.DataSource = DeathProbabilities.ToList();
+            //dataGridView1.DataSource = DeathProbabilities.ToList();
+
+            for (int year = 2005; year <= 2024; year++)  //nem foreach mert változó alap
+            {
+                for (int i = 0; i < Population.Count; i++)
+                {
+
+                }
+                int ferfiakszama = (from x in Population where x.Gender == Gender.Male select x).Count();
+                int nokkszama = (from x in Population where x.Gender == Gender.Female select x).Count();
+
+                Console.WriteLine(String.Format("Év: {0} Férfiak: {1} Nők: {2})",year,ferfiakszama,nokkszama ));
+            }
 
         }
 
