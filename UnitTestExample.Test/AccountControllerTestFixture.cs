@@ -28,5 +28,24 @@ namespace UnitTestExample.Test
             // Assert
             Assert.AreEqual(exceptedResult, actualResult);
         }
+
+        [Test,
+            TestCase("sdJKasdy",false), //nincsszám
+            TestCase("SDKJASD2", false), //nincs kisbetű
+            TestCase("sdjkasd2", false),  //nincs nagybetű
+            TestCase("sdJK2as", false),  //rövid
+            TestCase("sdJK2asX", true), //ok
+
+            //"A jelszó legalább 8 karakter hosszú kell legyen, csak az angol ABC betűiből és számokból állhat, és tartalmaznia kell legalább egy kisbetűt, egy nagybetűt és egy számot.")
+            ]
+        public void TestValidatePassword(string password, bool exceptedResult) 
+        {
+            // Arrange
+            var accountController = new AccountController();
+            // Act
+            var actualResult = accountController.ValidatePassword(password);
+            // Assert
+            Assert.AreEqual(exceptedResult,actualResult);
+        }
     }
 }
