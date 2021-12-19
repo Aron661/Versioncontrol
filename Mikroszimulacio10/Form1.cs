@@ -18,26 +18,54 @@ namespace Mikroszimulacio10
         List<BirthProbability> BirthProbabilities;
         List<DeathProbability> DeathProbabilities;
 
+        List<int> ferfiak= new List<int>(); //kiiratáshoz listák
+        List<int> nok = new List<int>();
+
         Random rng = new Random(1234);
 
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopulation(@"C:\Temp\nép-teszt.csv");  //vagy @ v. \\
-            BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
-            DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
+            
             //dataGridView1.DataSource = DeathProbabilities.ToList();
 
-            for (int year = 2005; year <= 2024; year++)  //nem foreach mert változó alap
+            
+
+        }
+
+        private void Simulation(int zaroev, string fajlnev)
+        {
+            ferfiak.Clear();
+            nok.Clear();
+
+            Population = GetPopulation(fajlnev);  //vagy @ v. //@"C:\Temp\nép-teszt.csv"
+            BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
+            DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
+
+            for (int year = 2005; year <= zaroev; year++)  //nem foreach mert változó alap
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-                    SimStep(Population[i],year);
+                    SimStep(Population[i], year);
                 }
                 int ferfiakszama = (from x in Population where x.Gender == Gender.Male select x).Count();
                 int nokkszama = (from x in Population where x.Gender == Gender.Female select x).Count();
 
-                Console.WriteLine(String.Format("Év: {0} Férfiak: {1} Nők: {2})",year,ferfiakszama,nokkszama ));
+                ferfiak.Add(ferfiakszama);
+                nok.Add(nokkszama);
+
+                //Console.WriteLine(String.Format("Év: {0} Férfiak: {1} Nők: {2})", year, ferfiakszama, nokkszama));
+            }
+            DisplayResults(zaroev);
+        }
+
+        void DisplayResults(int zaroev) 
+        {
+            int counter = 0;
+            for (int year = 2005; year <= zaroev; year++)
+            {
+                richTextBox1.Text += string.Format("Szimulációs év: {0}\n\t Férfiak: {1}\n\t Nők: {2}\n\t",year,ferfiak[counter],nok[counter]);
+                counter++;
             }
 
         }
@@ -129,5 +157,15 @@ namespace Mikroszimulacio10
             return results;
         }
 
+        private void button_start_Click(object sender, EventArgs e)
+        {
+            Simulation((int)numericUpDown1.Value,textBox1.Text);
+        }
+
+        private void button_browse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK) textBox1.Text = ofd.FileName;
+        }
     }
 }
