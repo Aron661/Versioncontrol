@@ -22,7 +22,7 @@ namespace UnitTestExample.Services
             if (oldAccount != null)
                 throw new ApplicationException(
                     "Már létezik felhasználó ilyen e-mail címmel!");
-
+            account.ID = Guid.NewGuid(); //hogy a kapott Id ne legyen 0 értékű
             Accounts.Add(account);
 
             return account;

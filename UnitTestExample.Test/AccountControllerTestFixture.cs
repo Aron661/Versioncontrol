@@ -11,7 +11,7 @@ namespace UnitTestExample.Test
     public class AccountControllerTestFixture
     {
         [Test,
-            TestCase ("abcd1234",false),
+            TestCase("abcd1234", false),
             TestCase("irf@uni - corvinus", false),
             TestCase("irf.uni-corvinus.hu", false),
             TestCase("irf@uni-corvinus.hu", true)
@@ -30,7 +30,7 @@ namespace UnitTestExample.Test
         }
 
         [Test,
-            TestCase("sdJKasdy",false), //nincsszám
+            TestCase("sdJKasdy", false), //nincsszám
             TestCase("SDKJASD2", false), //nincs kisbetű
             TestCase("sdjkasd2", false),  //nincs nagybetű
             TestCase("sdJK2as", false),  //rövid
@@ -38,14 +38,30 @@ namespace UnitTestExample.Test
 
             //"A jelszó legalább 8 karakter hosszú kell legyen, csak az angol ABC betűiből és számokból állhat, és tartalmaznia kell legalább egy kisbetűt, egy nagybetűt és egy számot.")
             ]
-        public void TestValidatePassword(string password, bool exceptedResult) 
+        public void TestValidatePassword(string password, bool exceptedResult)
         {
             // Arrange
             var accountController = new AccountController();
             // Act
             var actualResult = accountController.ValidatePassword(password);
             // Assert
-            Assert.AreEqual(exceptedResult,actualResult);
+            Assert.AreEqual(exceptedResult, actualResult);
+        }
+
+        [Test,
+            TestCase("irf@uni-corvinus.hu", "Abcd1234"),
+            TestCase("aron.toth@uni-corvinus.hu", "AbcD1234567"),
+            ]
+        public void TestRegisterHappyPath(string email, string password)
+        {
+            //Arrange
+            var accountController = new AccountController();
+            //Act
+            var actualResult = accountController.Register(email, password);
+            //Assert
+            Assert.AreEqual(email, actualResult.Email);
+            Assert.AreEqual(password, actualResult.Password);
+            Assert.AreNotEqual(Guid.Empty, actualResult.ID);
         }
     }
 }
