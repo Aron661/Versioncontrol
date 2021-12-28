@@ -23,7 +23,7 @@ namespace Evolucios_alg_Worldhardestgame
         int generation = 1;
 
         /*győzteskezelés*/
-        Brain winnerBrain;
+        Brain winnerBrain=null;
 
         public Form1()
         {
@@ -71,15 +71,25 @@ namespace Evolucios_alg_Worldhardestgame
             gc.Start();
 
             var winners = from p in topPerformers
-                          where p.IsWinner
+                          where p.IsWinner  //tesztelsé !p.IsWinner()
                           select p;
 
             if (winners.Count()>0)
             {
-                winners.FirstOrDefault().Brain.Clone();
+                winnerBrain = winners.FirstOrDefault().Brain.Clone();
                 gc.GameOver -= Gc_GameOver;
+                btn_Start.Visible = true; //start gomb iteráció végén
                 return;
             }
+        }
+
+        private void btn_Start_Click(object sender, EventArgs e)
+        {
+            gc.ResetCurrentLevel();
+            gc.AddPlayer(winnerBrain.Clone());
+            gc.AddPlayer();
+            ga.Focus();
+            gc.Start(true);
         }
     }
 }
