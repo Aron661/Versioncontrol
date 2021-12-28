@@ -25,8 +25,11 @@ namespace Evolucios_alg_Worldhardestgame
         public Form1()
         {
             InitializeComponent();
+            //label_generation.BringToFront();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
+
+            gc.GameOver += Gc_GameOver;
 
             for (int i = 0; i < populationSize; i++)
             {
@@ -36,6 +39,19 @@ namespace Evolucios_alg_Worldhardestgame
             
             //gc.AddPlayer(); tesztelésre
             //gc.Start(true);
+        }
+
+        private void Gc_GameOver(object sender)
+        {
+            generation++;
+            label_generation.Text = string.Format("{0}. generáció",generation);
+
+            var playerList = from p in gc.GetCurrentPlayers()
+                             orderby p.GetFitness() descending
+                             select p;
+            var topPerformers = playerList.Take(populationSize / 2).ToList();
+
+
         }
     }
 }

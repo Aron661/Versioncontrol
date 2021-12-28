@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.label_generation = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // label_generation
+            // 
+            this.label_generation.AutoSize = true;
+            this.label_generation.Location = new System.Drawing.Point(168, 304);
+            this.label_generation.Name = "label_generation";
+            this.label_generation.Size = new System.Drawing.Size(66, 13);
+            this.label_generation.TabIndex = 0;
+            this.label_generation.Text = "1. generáció";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label_generation);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label_generation;
     }
 }
 
