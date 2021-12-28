@@ -21,6 +21,9 @@ namespace Evolucios_alg_Worldhardestgame
             InitializeComponent();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
+
+            //gc.AddPlayer(); tesztelésre
+            //gc.Start(true);
         }
     }
 }
