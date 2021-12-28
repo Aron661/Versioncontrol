@@ -22,6 +22,9 @@ namespace Evolucios_alg_Worldhardestgame
         int nbrOfStepsIncrement = 10;
         int generation = 1;
 
+        /*győzteskezelés*/
+
+
         public Form1()
         {
             InitializeComponent();
@@ -36,7 +39,7 @@ namespace Evolucios_alg_Worldhardestgame
                 gc.AddPlayer(nbrOfSteps);
             }
             gc.Start();
-            
+
             //gc.AddPlayer(); tesztelésre
             //gc.Start(true);
         }
@@ -44,14 +47,28 @@ namespace Evolucios_alg_Worldhardestgame
         private void Gc_GameOver(object sender)
         {
             generation++;
-            label_generation.Text = string.Format("{0}. generáció",generation);
+            label_generation.Text = string.Format("{0}. generáció", generation);
 
             var playerList = from p in gc.GetCurrentPlayers()
                              orderby p.GetFitness() descending
                              select p;
             var topPerformers = playerList.Take(populationSize / 2).ToList();
 
+            gc.ResetCurrentLevel();
+            foreach (var p in topPerformers)
+            {
+                var b = p.Brain.Clone();
+                if (generation % 3 == 0)
+                    gc.AddPlayer(b.ExpandBrain(nbrOfStepsIncrement));
+                else
+                    gc.AddPlayer(b);
 
+                if (generation % 3 == 0)
+                    gc.AddPlayer(b.Mutate().ExpandBrain(nbrOfStepsIncrement));
+                else
+                    gc.AddPlayer(b.Mutate());
+            }
+            gc.Start();
         }
     }
 }
